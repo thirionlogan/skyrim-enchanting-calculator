@@ -46,8 +46,8 @@ export const PerksInput = (props) => {
         marks={marks}
         min={0}
         max={5}
-        value={state.enchanterPerk}
-        onChange={handleChangeEnchanterPerk}
+        // value={state.enchanterPerk}
+        // onChange={handleChangeEnchanterPerk}
       />
       <br />
       {state.perks.map((perk) => {
