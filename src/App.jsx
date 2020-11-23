@@ -43,6 +43,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
+  const otherTreePerks = [
+    { name: "Augmented Flames", selected: false }, // 1/2
+    { name: "Augmented Frost", selected: false }, // 1/2
+    { name: "Augmented Shock", selected: false }, // 1/2
+    { name: "Necromage", selected: false },
+    { name: "Master of the Mind", selected: false },
+  ];
   const enchantmentPerks = [
     { name: "Fire Enchanter", selected: false },
     { name: "Frost Enchanter", selected: false },
@@ -50,14 +57,8 @@ function App() {
     { name: "Insightful Enchanter", selected: false },
     { name: "Corpus Enchanter", selected: false },
     { name: "Extra Effect", selected: false },
+    ...otherTreePerks,
   ];
-  /*TODO: Add these Perks from other trees:
-    Augmented Flames 1/2
-    Aumented Frost 1/2
-    Augmented Shock 1/2
-    Master of the mind
-    Necromage
-  */
 
   const classes = useStyles();
   const [state, setState] = useState({
