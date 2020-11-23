@@ -32,7 +32,7 @@ export const PerksInput = (props) => {
         Perks
       </Typography>
       {state.perks.map((perk) => {
-        return perk.maxLevel ? (
+        return perk.isMultilevelPerk ? (
           <FormControl className={classes.formControl}>
             <InputLabel id="demo-simple-select-filled-label">
               {perk.name}

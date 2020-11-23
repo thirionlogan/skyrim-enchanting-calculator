@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Divider from "@material-ui/core/Divider";
@@ -13,6 +13,7 @@ import { EnchantmentInput } from "./Components/EnchantmentInput";
 import { SoulInput } from "./Components/SoulInput";
 import { PerksInput } from "./Components/PerksInput";
 import { EnchantmentEffect } from "./Components/EnchantmentEffect";
+import Perk from "./Classes/Perk";
 
 const theme = createMuiTheme({
   palette: {
@@ -44,20 +45,20 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const otherTreePerks = [
-    { name: "Augmented Flames", level: 0, maxLevel: 2 },
-    { name: "Augmented Frost", level: 0, maxLevel: 2 },
-    { name: "Augmented Shock", level: 0, maxLevel: 2 },
-    { name: "Necromage", selected: false },
-    { name: "Master of the Mind", selected: false },
+    new Perk("Augmented Flames", { level: 0, maxLevel: 2 }),
+    new Perk("Augmented Frost", { level: 0, maxLevel: 2 }),
+    new Perk("Augmented Shock", { level: 0, maxLevel: 2 }),
+    new Perk("Necromage", { selected: false }),
+    new Perk("Master of the Mind", { selected: false }),
   ];
   const enchantmentPerks = [
-    { name: "Enchanter", level: 0, maxLevel: 5 },
-    { name: "Fire Enchanter", selected: false },
-    { name: "Frost Enchanter", selected: false },
-    { name: "Storm Enchanter", selected: false },
-    { name: "Insightful Enchanter", selected: false },
-    { name: "Corpus Enchanter", selected: false },
-    { name: "Extra Effect", selected: false },
+    new Perk("Enchanter", { level: 0, maxLevel: 5 }),
+    new Perk("Fire Enchanter", { selected: false }),
+    new Perk("Frost Enchanter", { selected: false }),
+    new Perk("Storm Enchanter", { selected: false }),
+    new Perk("Insightful Enchanter", { selected: false }),
+    new Perk("Corpus Enchanter", { selected: false }),
+    new Perk("Extra Effect", { selected: false }),
     ...otherTreePerks,
   ].sort((a, b) => {
     return a.maxLevel ? -1 : 1;
@@ -71,10 +72,6 @@ function App() {
     perks: enchantmentPerks,
     enchanterPerk: 0,
     skill: "",
-  });
-
-  useEffect(() => {
-    console.log(state);
   });
 
   const handleChangeSlot = (event) => {
@@ -101,10 +98,9 @@ function App() {
       ...state,
       perks: state.perks.map((perk) => {
         if (perk.name === value.name) {
-          return { ...value, selected: !perk.selected };
-        } else {
-          return perk;
+          perk.toggleSelected();
         }
+        return perk;
       }),
     });
   };
@@ -114,17 +110,13 @@ function App() {
       ...state,
       perks: state.perks.map((perk) => {
         if (perk.name === value.name) {
-          return value;
-        } else {
-          return perk;
+          perk.level = value.level;
         }
+        return perk;
       }),
     });
   };
 
-  const handleChangeEnchanterPerk = (event) => {
-    setState({ ...state, enchanterPerk: event.target.value });
-  };
   const handleChangeSkill = (event) => {
     setState({ ...state, skill: event.target.value });
   };
@@ -157,13 +149,18 @@ function App() {
                 type="number"
                 value={state.skill}
                 onChange={handleChangeSkill}
+                error={state.skill > 100 || state.skill < 0}
+                helperText={
+                  state.skill > 100 || state.skill < 0
+                    ? "Skill level must be between 0 and 100"
+                    : ""
+                }
               />
             </FormControl>
             <Divider />
             <PerksInput
               classes={classes}
               state={state}
-              handleChangeEnchanterPerk={handleChangeEnchanterPerk}
               handleChangePerk={handleChangePerk}
               handleChangeMultilevelPerk={handleChangeMultilevelPerk}
             />
