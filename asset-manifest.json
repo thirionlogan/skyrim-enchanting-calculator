@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/skyrim-enchanting-calculator/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/skyrim-enchanting-calculator/static/js/main.1d74d193.chunk.js",
-    "main.js.map": "/skyrim-enchanting-calculator/static/js/main.1d74d193.chunk.js.map",
+    "main.js": "/skyrim-enchanting-calculator/static/js/main.e9383369.chunk.js",
+    "main.js.map": "/skyrim-enchanting-calculator/static/js/main.e9383369.chunk.js.map",
     "runtime-main.js": "/skyrim-enchanting-calculator/static/js/runtime-main.f6bb1c6e.js",
     "runtime-main.js.map": "/skyrim-enchanting-calculator/static/js/runtime-main.f6bb1c6e.js.map",
-    "static/js/2.cb837659.chunk.js": "/skyrim-enchanting-calculator/static/js/2.cb837659.chunk.js",
-    "static/js/2.cb837659.chunk.js.map": "/skyrim-enchanting-calculator/static/js/2.cb837659.chunk.js.map",
+    "static/js/2.739e040f.chunk.js": "/skyrim-enchanting-calculator/static/js/2.739e040f.chunk.js",
+    "static/js/2.739e040f.chunk.js.map": "/skyrim-enchanting-calculator/static/js/2.739e040f.chunk.js.map",
     "static/js/3.116fad58.chunk.js": "/skyrim-enchanting-calculator/static/js/3.116fad58.chunk.js",
     "static/js/3.116fad58.chunk.js.map": "/skyrim-enchanting-calculator/static/js/3.116fad58.chunk.js.map",
     "index.html": "/skyrim-enchanting-calculator/index.html",
     "static/css/main.6dea0f05.chunk.css.map": "/skyrim-enchanting-calculator/static/css/main.6dea0f05.chunk.css.map",
-    "static/js/2.cb837659.chunk.js.LICENSE.txt": "/skyrim-enchanting-calculator/static/js/2.cb837659.chunk.js.LICENSE.txt"
+    "static/js/2.739e040f.chunk.js.LICENSE.txt": "/skyrim-enchanting-calculator/static/js/2.739e040f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.f6bb1c6e.js",
-    "static/js/2.cb837659.chunk.js",
+    "static/js/2.739e040f.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.1d74d193.chunk.js"
+    "static/js/main.e9383369.chunk.js"
   ]
 }
