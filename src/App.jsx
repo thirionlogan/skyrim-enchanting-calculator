@@ -192,7 +192,7 @@ function App() {
   const classes = useStyles();
   const [state, setState] = useState({
     slot: "",
-    enchantment: "",
+    enchantment: "", // implement "Extra effect"
     soulSize: "",
     perks: enchantmentPerks,
     enchanterPerk: 0,
