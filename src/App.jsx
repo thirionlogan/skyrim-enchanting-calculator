@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Divider from "@material-ui/core/Divider";
@@ -62,18 +62,31 @@ function App() {
   const classes = useStyles();
   const [state, setState] = useState({
     slot: "",
-    enchantment: "", // implement "Extra effect"
+    enchantment: [""],
     soulSize: "",
     perks: enchantmentPerks,
     enchanterPerk: 0,
     skill: "",
   });
 
+  useEffect(() => {
+    console.log(state);
+  });
+
   const handleChangeSlot = (event) => {
     setState({ ...state, slot: event.target.value });
   };
-  const handleChangeEnchantment = (event) => {
-    setState({ ...state, enchantment: event.target.value });
+  const handleChangeFirstEnchantment = (event) => {
+    setState({
+      ...state,
+      enchantment: [JSON.parse(event.target.value), state.enchantment[1]],
+    });
+  };
+  const handleChangeSecondEnchantment = (event) => {
+    setState({
+      ...state,
+      enchantment: [state.enchantment[0], JSON.parse(event.target.value)],
+    });
   };
   const handleChangeSoulSize = (event) => {
     setState({ ...state, soulSize: event.target.value });
@@ -112,7 +125,8 @@ function App() {
             <EnchantmentInput
               classes={classes}
               state={state}
-              handleChangeEnchantment={handleChangeEnchantment}
+              handleChangeFirstEnchantment={handleChangeFirstEnchantment}
+              handleChangeSecondEnchantment={handleChangeSecondEnchantment}
             />
             <SoulInput
               classes={classes}

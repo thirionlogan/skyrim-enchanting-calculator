@@ -5,7 +5,12 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
 export const EnchantmentInput = (props) => {
-  const { classes, state, handleChangeEnchantment } = props;
+  const {
+    classes,
+    state,
+    handleChangeFirstEnchantment,
+    handleChangeSecondEnchantment,
+  } = props;
   const weaponEnchantments = [
     { name: "Absorb Health", slots: ["Weapon"] },
     { name: "Absorb Magicka", slots: ["Weapon"] },
@@ -96,29 +101,75 @@ export const EnchantmentInput = (props) => {
     ...weaponEnchantments,
   ];
   return (
-    <FormControl className={classes.formControl}>
-      <InputLabel id="demo-simple-select-filled-label">Enchantment</InputLabel>
-      <Select
-        labelId="demo-simple-select-filled-label"
-        id="demo-simple-select-filled"
-        value={state.enchantment}
-        onChange={handleChangeEnchantment}
-      >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
-        {enchantments
-          .filter((enchantment) => {
-            return enchantment.slots.includes(state.slot);
-          })
-          .map((enchantment) => {
-            return (
-              <MenuItem
-                value={enchantment.name}
-              >{`${enchantment.name}`}</MenuItem>
-            );
-          })}
-      </Select>
-    </FormControl>
+    <>
+      <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-filled-label">
+          Enchantment
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-filled-label"
+          id="demo-simple-select-filled"
+          value={
+            state.enchantment[0] ? JSON.stringify(state.enchantment[0]) : ""
+          }
+          onChange={handleChangeFirstEnchantment}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          {enchantments
+            .filter((enchantment) => {
+              return (
+                enchantment.slots.includes(state.slot) &&
+                enchantment.name !== state.enchantment[1]?.name
+              );
+            })
+            .map((enchantment) => {
+              return (
+                <MenuItem
+                  value={JSON.stringify(enchantment)}
+                >{`${enchantment.name}`}</MenuItem>
+              );
+            })}
+        </Select>
+      </FormControl>
+      {state.perks.reduce((isExtraEffectSelected, perk) => {
+        return isExtraEffectSelected
+          ? isExtraEffectSelected
+          : perk.name === "Extra Effect" && perk.selected;
+      }, false) ? (
+        <FormControl className={classes.formControl}>
+          <InputLabel id="demo-simple-select-filled-label">
+            Enchantment 2
+          </InputLabel>
+          <Select
+            labelId="demo-simple-select-filled-label"
+            id="demo-simple-select-filled"
+            value={
+              state.enchantment[1] ? JSON.stringify(state.enchantment[1]) : ""
+            }
+            onChange={handleChangeSecondEnchantment}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {enchantments
+              .filter((enchantment) => {
+                return (
+                  enchantment.slots.includes(state.slot) &&
+                  enchantment.name !== state.enchantment[0]?.name
+                );
+              })
+              .map((enchantment) => {
+                return (
+                  <MenuItem
+                    value={JSON.stringify(enchantment)}
+                  >{`${enchantment.name}`}</MenuItem>
+                );
+              })}
+          </Select>
+        </FormControl>
+      ) : null}
+    </>
   );
 };

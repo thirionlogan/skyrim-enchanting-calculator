@@ -8,7 +8,13 @@ export const EnchantmentEffect = (props) => {
       <Typography color="textSecondary" display="block" variant="caption">
         Effect
       </Typography>
-      <Typography>{`Sneak is ${100}% stronger.`}</Typography>
+      {state.enchantment.map((enchantment) => {
+        return enchantment ? (
+          <Typography>{`${
+            enchantment.name
+          }: Sneak is ${100}% stronger.`}</Typography>
+        ) : null;
+      })}
     </>
   );
 };
