@@ -12,6 +12,7 @@ import { ItemInput } from "./Components/ItemInput";
 import { EnchantmentInput } from "./Components/EnchantmentInput";
 import { SoulInput } from "./Components/SoulInput";
 import { PerksInput } from "./Components/PerksInput";
+import { EnchantmentEffect } from "./Components/EnchantmentEffect";
 
 const theme = createMuiTheme({
   palette: {
@@ -103,39 +104,39 @@ function App() {
       <div className="App">
         <header className={classes.appHeader}>
           <Paper className={classes.paperContainer}>
-            <div>
-              <ItemInput
-                classes={classes}
-                state={state}
-                handleChangeSlot={handleChangeSlot}
+            <ItemInput
+              classes={classes}
+              state={state}
+              handleChangeSlot={handleChangeSlot}
+            />
+            <EnchantmentInput
+              classes={classes}
+              state={state}
+              handleChangeEnchantment={handleChangeEnchantment}
+            />
+            <SoulInput
+              classes={classes}
+              state={state}
+              handleChangeSoulSize={handleChangeSoulSize}
+            />
+            <FormControl className={classes.formControl}>
+              <TextField
+                id="standard-basic"
+                label="Skill Level"
+                type="number"
+                value={state.skill}
+                onChange={handleChangeSkill}
               />
-              <EnchantmentInput
-                classes={classes}
-                state={state}
-                handleChangeEnchantment={handleChangeEnchantment}
-              />
-              <SoulInput
-                classes={classes}
-                state={state}
-                handleChangeSoulSize={handleChangeSoulSize}
-              />
-              <FormControl className={classes.formControl}>
-                <TextField
-                  id="standard-basic"
-                  label="Skill Level"
-                  type="number"
-                  value={state.skill}
-                  onChange={handleChangeSkill}
-                />
-              </FormControl>
-              <Divider variant="middle" />
-              <PerksInput
-                classes={classes}
-                state={state}
-                handleChangeEnchanterPerk={handleChangeEnchanterPerk}
-                handleChangePerk={handleChangePerk}
-              />
-            </div>
+            </FormControl>
+            <Divider />
+            <PerksInput
+              classes={classes}
+              state={state}
+              handleChangeEnchanterPerk={handleChangeEnchanterPerk}
+              handleChangePerk={handleChangePerk}
+            />
+            <Divider />
+            <EnchantmentEffect classes={classes} state={state} />
           </Paper>
         </header>
       </div>
