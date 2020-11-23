@@ -35,7 +35,9 @@ export const PerksInput = (props) => {
   const { state, classes, handleChangeEnchanterPerk, handleChangePerk } = props;
   return (
     <>
-      <Typography variant="h5">Perks</Typography>
+      <Typography color="textSecondary" display="block" variant="caption">
+        Perks
+      </Typography>
       <Slider
         className={classes.slider}
         defaultValue={0}
