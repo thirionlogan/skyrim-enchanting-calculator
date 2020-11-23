@@ -44,13 +44,14 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const otherTreePerks = [
-    { name: "Augmented Flames", selected: false }, // 1/2
-    { name: "Augmented Frost", selected: false }, // 1/2
-    { name: "Augmented Shock", selected: false }, // 1/2
+    { name: "Augmented Flames", level: 0, maxLevel: 2 },
+    { name: "Augmented Frost", level: 0, maxLevel: 2 },
+    { name: "Augmented Shock", level: 0, maxLevel: 2 },
     { name: "Necromage", selected: false },
     { name: "Master of the Mind", selected: false },
   ];
   const enchantmentPerks = [
+    { name: "Enchanter", level: 0, maxLevel: 5 },
     { name: "Fire Enchanter", selected: false },
     { name: "Frost Enchanter", selected: false },
     { name: "Storm Enchanter", selected: false },
@@ -58,7 +59,9 @@ function App() {
     { name: "Corpus Enchanter", selected: false },
     { name: "Extra Effect", selected: false },
     ...otherTreePerks,
-  ];
+  ].sort((a, b) => {
+    return a.maxLevel ? -1 : 1;
+  });
 
   const classes = useStyles();
   const [state, setState] = useState({
@@ -99,6 +102,19 @@ function App() {
       perks: state.perks.map((perk) => {
         if (perk.name === value.name) {
           return { ...value, selected: !perk.selected };
+        } else {
+          return perk;
+        }
+      }),
+    });
+  };
+  const handleChangeMultilevelPerk = (event) => {
+    const value = JSON.parse(event.target.value);
+    setState({
+      ...state,
+      perks: state.perks.map((perk) => {
+        if (perk.name === value.name) {
+          return value;
         } else {
           return perk;
         }
@@ -149,6 +165,7 @@ function App() {
               state={state}
               handleChangeEnchanterPerk={handleChangeEnchanterPerk}
               handleChangePerk={handleChangePerk}
+              handleChangeMultilevelPerk={handleChangeMultilevelPerk}
             />
             <Divider />
             <EnchantmentEffect classes={classes} state={state} />

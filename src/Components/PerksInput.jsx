@@ -1,59 +1,51 @@
 import React from "react";
 import Checkbox from "@material-ui/core/Checkbox";
-import Slider from "@material-ui/core/Slider";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
 
 export const PerksInput = (props) => {
-  const valuetext = (value) => {
-    return `Enchanter ${value}`;
+  const {
+    state,
+    classes,
+    handleChangePerk,
+    handleChangeMultilevelPerk,
+  } = props;
+
+  const getMultilevelPerkOptions = (perk) => {
+    let result = [];
+    for (let i = 0; i <= perk.maxLevel; i++) {
+      result.push(
+        <MenuItem value={JSON.stringify({ ...perk, level: i })}>
+          {i ? `${perk.name} ${i}` : <em>None</em>}
+        </MenuItem>
+      );
+    }
+    return result;
   };
-
-  const marks = [
-    {
-      value: 1,
-      label: "Enchanter 1",
-    },
-    {
-      value: 2,
-      label: "Enchanter 2",
-    },
-    {
-      value: 3,
-      label: "Enchanter 3",
-    },
-    {
-      value: 4,
-      label: "Enchanter 4",
-    },
-    {
-      value: 5,
-      label: "Enchanter 5",
-    },
-  ];
-
-  const { state, classes, handleChangeEnchanterPerk, handleChangePerk } = props;
   return (
     <>
       <Typography color="textSecondary" display="block" variant="caption">
         Perks
       </Typography>
-      <Slider
-        className={classes.slider}
-        defaultValue={0}
-        getAriaValueText={valuetext}
-        aria-labelledby="discrete-slider"
-        valueLabelDisplay="auto"
-        step={1}
-        marks={marks}
-        min={0}
-        max={5}
-        // value={state.enchanterPerk}
-        // onChange={handleChangeEnchanterPerk}
-      />
-      <br />
       {state.perks.map((perk) => {
-        return (
+        return perk.maxLevel ? (
+          <FormControl className={classes.formControl}>
+            <InputLabel id="demo-simple-select-filled-label">
+              {perk.name}
+            </InputLabel>
+            <Select
+              defaultValue={JSON.stringify({ ...perk, level: 0 })}
+              value={JSON.stringify(perk)}
+              onChange={handleChangeMultilevelPerk}
+            >
+              {getMultilevelPerkOptions(perk)}
+            </Select>
+          </FormControl>
+        ) : (
           <FormControlLabel
             className={classes.formControl}
             control={
