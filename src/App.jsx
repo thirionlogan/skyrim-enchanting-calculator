@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
-  paperContainer: { padding: 16, width: "80%" },
+  paperContainer: { padding: 16, width: "80%", maxWidth: "1080px" },
   appHeader: {
     backgroundColor: "#282c34",
     minHeight: "100vh",
